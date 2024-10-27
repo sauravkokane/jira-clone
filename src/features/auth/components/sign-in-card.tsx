@@ -18,24 +18,24 @@ import {
 } from "@/components/ui/form";
 import React from "react";
 import Link from "next/link";
-
-const formSchema = z.object({
-  email: z.string().trim().email(),
-  password: z.string().min(1, "Required").max(256),
-});
-
-const onSubmit = (values: z.infer<typeof formSchema>) => {
-  console.log(values);
-};
+import { loginSchema } from "../schemas";
+import { useLogin } from "../api/use-login";
 
 export const SignInCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useLogin();
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
+
+  const onSubmit = (values: z.infer<typeof loginSchema>) => {
+    mutate({ json: values });
+    console.log("values", values);
+  };
+
   return (
     <Card className="h-full w-full md:w-[487px] border-none shadow-none">
       <CardHeader className="flex justify-center items-center text-center p-7">

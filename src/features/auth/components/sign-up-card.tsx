@@ -23,35 +23,29 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { registerSchema } from "../schemas";
+import { useRegister } from "../api/use-register";
 
-const formSchema = z.object({
-  name: z.string().trim().min(1, "Required").max(256),
-  email: z.string().trim().email(),
-  password: z.string().min(8, "Minimum 8 characters required.").max(256),
-});
-
-/**
- * Logs the form values to the console when the form is submitted.
- *
- * @param {z.infer<typeof formSchema>} values - The form values.
- */
-const onSubmit = (values: z.infer<typeof formSchema>) => {
-  console.log(values);
-};
 /**
  * A form card for signing up.
  *
  * @returns A card component with a signup form.
  */
 export const SignUpCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useRegister();
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
     },
   });
+
+  const onSubmit = (values: z.infer<typeof registerSchema>) => {
+    mutate({ json: values });
+    console.log(values);
+  };
 
   return (
     <Card className="h-full w-full md:w-[487px] border-none shadow-none">

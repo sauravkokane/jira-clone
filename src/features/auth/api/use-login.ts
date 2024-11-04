@@ -13,7 +13,7 @@ export const useLogin = () => {
     >({
         mutationFn: async ({json}) => {
             const response = await client.api.auth.login["$post"]({ json });
-            console.log("response", response);
+            
             return await response.json();
         }
     });

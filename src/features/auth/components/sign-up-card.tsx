@@ -1,3 +1,5 @@
+"use client";
+
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
@@ -44,7 +46,6 @@ export const SignUpCard = () => {
 
   const onSubmit = (values: z.infer<typeof registerSchema>) => {
     mutate({ json: values });
-    console.log(values);
   };
 
   return (
@@ -119,7 +120,7 @@ export const SignUpCard = () => {
             />
 
             <Button disabled={false} size={"lg"} className="w-full">
-              Sign up
+              Register
             </Button>
           </form>
         </Form>

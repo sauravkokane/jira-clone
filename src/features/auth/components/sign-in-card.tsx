@@ -1,3 +1,5 @@
+"use client";
+
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
@@ -33,7 +35,6 @@ export const SignInCard = () => {
 
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
     mutate({ json: values });
-    console.log("values", values);
   };
 
   return (
@@ -80,7 +81,7 @@ export const SignInCard = () => {
               )}
             />
             <Button disabled={false} size={"lg"} className="w-full">
-              Login
+              Log in
             </Button>
           </form>
         </Form>

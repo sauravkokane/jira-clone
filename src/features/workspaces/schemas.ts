@@ -2,5 +2,11 @@ import { z } from "zod";
 
 export const CreateWorkspaceSchema = z.object({
     name: z.string().trim().min(1, "Required"),
-    // userId: z.string().trim(),
+    image: z.union([
+        z.instanceof(File),
+        z.string().transform((value) => value === "" ? undefined : value)
+    ])
+        .optional(),
+    
+
 });

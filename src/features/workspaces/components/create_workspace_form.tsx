@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { ImageIcon } from 'lucide-react';
 
+import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DottedSeparator } from '@/components/dotted-separator';
 
@@ -168,6 +169,7 @@ export const CreateWorkspaceForm: React.FC<CreateWorkspaceFormProps> = ({ onCanc
                                 variant="secondary"
                                 onClick={onCancel}
                                 disabled={isPending}
+                                className={cn(!onCancel && "invisible")}
                             >
                                 Cancel
                             </Button>

@@ -1,7 +1,16 @@
 import React from 'react'
+import { redirect } from 'next/navigation';
+
+import { getCurrent } from '@/features/auth/queries';
 import { CreateWorkspaceForm } from '@/features/workspaces/components/create_workspace_form';
 
-const WorkspaceCreatePage = () => {
+const WorkspaceCreatePage = async () => {
+    const user = await getCurrent();
+
+    if (!user) {
+        redirect("/sign-in");
+    }
+
     return (
         <div className="w-full lg:max-w-xl">
             <CreateWorkspaceForm />

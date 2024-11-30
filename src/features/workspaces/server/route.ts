@@ -7,7 +7,7 @@ import { MemberRole } from "@/features/members/types";
 import { generateInviteCode } from "@/lib/utils";
 import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, WORKSPACES_ID } from "@/config";
 
-import { CreateWorkspaceSchema } from "../schemas";
+import { createWorkspaceSchema } from "../schemas";
 
 const app = new Hono()
     .get("/", sessionMiddleware, async (c) => {
@@ -42,7 +42,7 @@ const app = new Hono()
     })
     .post(
         "/",
-        zValidator("form", CreateWorkspaceSchema),
+        zValidator("form", createWorkspaceSchema),
         sessionMiddleware,
         async (c) => {
             const databases = c.get("databases");

@@ -29,7 +29,7 @@ import {
     FormMessage
 } from '@/components/ui/form';
 
-import { CreateWorkspaceSchema } from '../schemas';
+import { createWorkspaceSchema } from '../schemas';
 import { useCreateWorkspace } from '../api/use-create-workspace';
 
 
@@ -43,15 +43,15 @@ export const CreateWorkspaceForm: React.FC<CreateWorkspaceFormProps> = ({ onCanc
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const form = useForm<z.infer<typeof CreateWorkspaceSchema>>({
-        resolver: zodResolver(CreateWorkspaceSchema),
+    const form = useForm<z.infer<typeof createWorkspaceSchema>>({
+        resolver: zodResolver(createWorkspaceSchema),
         defaultValues: {
             name: "",
         }
     });
 
 
-    const onSubmit = (values: z.infer<typeof CreateWorkspaceSchema>) => {
+    const onSubmit = (values: z.infer<typeof createWorkspaceSchema>) => {
         const finalValues = {
             ...values,
             image: values.image instanceof File ? values.image : "",
